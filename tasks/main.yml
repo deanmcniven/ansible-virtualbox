@@ -1,0 +1,6 @@
+---
+- include: guest-additions.yml
+  when: ansible_virtualization_role == "guest"
+
+- include: virtualbox.yml
+  when: ansible_virtualization_role == "host"
