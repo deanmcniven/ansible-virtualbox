@@ -2,9 +2,8 @@
 - name: Install Virtualbox Guest Additions
   become: true
   apt:
-    name: "{{ item }}"
+    pkg:
+      - virtualbox-guest-utils
+      - virtualbox-guest-x11
     state: present
-  with_items:
-    - virtualbox-guest-utils
-    - virtualbox-guest-x11
   when: ansible_virtualization_type == "virtualbox"

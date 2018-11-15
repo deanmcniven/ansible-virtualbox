@@ -2,11 +2,10 @@
 - name: Install Virtualbox
   become: true
   apt:
-    name: "{{ item }}"
+    pkg:
+      - virtualbox
+      - virtualbox-dkms
+      - virtualbox-ext-pack
+      - virtualbox-guest-additions-iso
+      - virtualbox-qt
     state: present
-  with_items:
-    - virtualbox
-    - virtualbox-dkms
-    - virtualbox-ext-pack
-    - virtualbox-guest-additions-iso
-    - virtualbox-qt
