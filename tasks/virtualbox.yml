@@ -1,11 +1,29 @@
 ---
+- name: Add oracle_vbox_2016 apt-key
+  become: true
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    state: present
+
+- name: Add oracle_vbox apt-key
+  become: true
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present
+
+- name: Install repository
+  become: true
+  vars:
+    repo_url: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian bionic contrib"
+  apt_repository:
+    repo: "{{ repo_url }}"
+    state: present
+    update_cache: yes
+  when: repo_url not in apt_sources
+
 - name: Install Virtualbox
   become: true
   apt:
     pkg:
-      - virtualbox
-      - virtualbox-dkms
-      - virtualbox-ext-pack
-      - virtualbox-guest-additions-iso
-      - virtualbox-qt
+      - virtualbox-6.1
     state: present
